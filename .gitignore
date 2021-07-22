@@ -11,3 +11,7 @@ web-build/
 
 # macOS
 .DS_Store
+.history/src/features/books/screens/search-menu/book-search.screen_20210722182642.js
+
+# Local History for Visual Studio Code
+.history/
