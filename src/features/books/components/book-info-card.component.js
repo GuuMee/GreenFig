@@ -1,6 +1,6 @@
 import React from "react";
 import { TypographyText } from "../../../components/typography/text.component";
-import { Card, Button, Portal, Provider } from "react-native-paper";
+import { Card, Button } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 
@@ -39,41 +39,31 @@ export const BookInfoCard = ({ book = {} }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <Provider>
-      <BookCard elevation={5}>
-        <BookCardCover
-          key={name}
-          source={{ uri: photos[0] }}
-          resizeMode="contain"
-        />
-        <Card.Content>
-          <TypographyText variant="title">{name}</TypographyText>
-        </Card.Content>
-        <Info>
-          <TypographyText variant="label"> {price} </TypographyText>
-          <Rating>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
-            ))}
-          </Rating>
-          {/* <StyledParagraph> {description} </StyledParagraph> */}
-        </Info>
-        <Button
-          icon="book"
-          mode="contained"
-          onPress={() => console.log("Pressed")}
-        >
-          Buy
-        </Button>
-        <Button mode="text" onPress={showModal}>
-          Preview
-        </Button>
-      </BookCard>
-      <Portal>
-        <ModalStyled visible={visible} onDismiss={hideModal}>
-          <StyledParagraph>{discription}</StyledParagraph>
-        </ModalStyled>
-      </Portal>
-    </Provider>
+    <BookCard elevation={5}>
+      <BookCardCover
+        key={name}
+        source={{ uri: photos[0] }}
+        resizeMode="contain"
+      />
+      <Card.Content>
+        <TypographyText variant="title">{name}</TypographyText>
+      </Card.Content>
+      <Info>
+        <TypographyText variant="label"> {price} </TypographyText>
+        <Rating>
+          {ratingArray.map(() => (
+            <SvgXml xml={star} width={20} height={20} />
+          ))}
+        </Rating>
+        {/* <StyledParagraph> {description} </StyledParagraph> */}
+      </Info>
+      <Button
+        icon="book"
+        mode="contained"
+        onPress={() => console.log("Pressed")}
+      >
+        Buy
+      </Button>
+    </BookCard>
   );
 };

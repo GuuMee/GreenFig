@@ -1,12 +1,9 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-import { Text } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
 import AppLoading from "expo-app-loading";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+
 import {
   useFonts as useIndieFlower,
   IndieFlower_400Regular,
@@ -21,30 +18,24 @@ import {
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
-import { SafeArea } from "./src/components/utility/safe-area.component";
-import { BookSearchScreen } from "./src/features/books/screens/search-menu/book-search.screen";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import { Navigation } from "./src/infrastructure/navigation/index";
+import * as firebase from "firebase";
 
-const Tab = createBottomTabNavigator();
-
-const TAB_ICON = {
-  BookshelfFocus: "md-library",
-  Bookshelf: "md-library-outline",
-  SearchFocus: "md-rocket",
-  Search: "md-rocket-outline",
-  ProfileFocus: "md-flower-sharp",
-  Profile: "md-flower-outline",
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAA7NI7WFMjwEtPWfkXPP8ReJmgaahCnSw",
+  authDomain: "greenfig-b15a5.firebaseapp.com",
+  projectId: "greenfig-b15a5",
+  storageBucket: "greenfig-b15a5.appspot.com",
+  messagingSenderId: "1021201968274",
+  appId: "1:1021201968274:web:a4e441de620faff1350a4b",
 };
 
-const Profile = () => (
-  <SafeArea>
-    <Text>Profile</Text>
-  </SafeArea>
-);
-const Bookshelf = () => (
-  <SafeArea>
-    <Text>Bookshelf</Text>
-  </SafeArea>
-);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 export default function App() {
   let [indieFlowerLoaded] = useIndieFlower({
     IndieFlower_400Regular,
@@ -69,34 +60,9 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-
-                if (route.name === "Bookshelf") {
-                  iconName = focused
-                    ? TAB_ICON.BookshelfFocus
-                    : TAB_ICON.Bookshelf;
-                } else if (route.name === "Search") {
-                  iconName = focused ? TAB_ICON.SearchFocus : TAB_ICON.Search;
-                } else if (route.name === "Profile") {
-                  iconName = focused ? TAB_ICON.ProfileFocus : TAB_ICON.Profile;
-                }
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-            })}
-            tabBarOptions={{
-              activeTintColor: "green",
-              inactiveTintColor: "gray",
-            }}
-          >
-            <Tab.Screen name="Bookshelf" component={Bookshelf} />
-            <Tab.Screen name="Search" component={BookSearchScreen} />
-            <Tab.Screen name="Profile" component={Profile} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <AuthenticationContextProvider>
+          <Navigation />
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

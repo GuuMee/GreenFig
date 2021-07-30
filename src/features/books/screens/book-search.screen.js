@@ -1,10 +1,10 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
-import { BookInfoCard } from "../../components/book-info-card.component";
-import { SafeArea } from "../../../../components/utility/safe-area.component";
+import { BookInfoCard } from "../components/book-info-card.component";
+import { SafeArea } from "../../../components/utility/safe-area.component";
 
 const SearchView = styled(View)`
   padding: ${(props) => props.theme.space[3]};
@@ -23,7 +23,7 @@ const BookList = styled(FlatList).attrs({
   },
 })``;
 
-export const BookSearchScreen = () => (
+export const BookSearchScreen = ({ navigation }) => (
   <SafeArea>
     <SearchView>
       <Searchbar />
@@ -48,10 +48,18 @@ export const BookSearchScreen = () => (
           { name: 15 },
           { name: 16 },
         ]}
-        renderItem={() => (
-          <>
-            <BookInfoCard />
-          </>
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("BookDetail", {
+                book: item,
+              })
+            }
+          >
+            <>
+              <BookInfoCard book={item} />
+            </>
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => item.name}
         numColumns={2}
