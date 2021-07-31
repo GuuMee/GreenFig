@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
+import { ActivityIndicator, Colors, TextInput } from "react-native-paper";
 import {
   AccountBackground,
   AccountCover,
   AccountContainer,
   AuthButton,
   AuthInput,
-  Title,
   ErrorContainer,
+  AnimationWrapperRegister,
 } from "./account.styles";
 
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -17,14 +18,22 @@ export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
-  const { onRegister, error } = useContext(AuthenticationContext);
+  const { onRegister, isLoading, error } = useContext(AuthenticationContext);
 
   return (
     <AccountBackground>
       <AccountCover />
-      <Title>Green Fig</Title>
       <AccountContainer>
+        {/* <AnimationWrapperRegister>
+          <LottieView
+            source={require("../../../../assets/character3.json")}
+            autoPlay
+            loop
+          />
+        </AnimationWrapperRegister> */}
         <AuthInput
+          left={<TextInput.Icon color="#8C8C8C" icon="email" size={30} />}
+          theme={{ colors: { primary: "#0e9d7c" } }}
           label="Email"
           value={email}
           textContentType="emailAddress"
@@ -34,6 +43,8 @@ export const RegisterScreen = ({ navigation }) => {
         />
         <Spacer variant="bottom.large" />
         <AuthInput
+          left={<TextInput.Icon color="#8C8C8C" icon="lock" size={30} />}
+          theme={{ colors: { primary: "#0e9d7c" } }}
           label="Password"
           value={password}
           textContentType="password"
@@ -43,6 +54,8 @@ export const RegisterScreen = ({ navigation }) => {
         />
         <Spacer variant="bottom.large" />
         <AuthInput
+          left={<TextInput.Icon color="#8C8C8C" icon="lock" size={30} />}
+          theme={{ colors: { primary: "#0e9d7c" } }}
           label="Repeat Password"
           value={repeatedPassword}
           textContentType="password"
@@ -56,14 +69,18 @@ export const RegisterScreen = ({ navigation }) => {
         </ErrorContainer>
 
         <Spacer variant="bottom.large" />
-        <AuthButton
-          dark={true}
-          icon="airballoon"
-          mode="contained"
-          onPress={() => onRegister(email, password, repeatedPassword)}
-        >
-          Register
-        </AuthButton>
+        {!isLoading ? (
+          <AuthButton
+            dark={true}
+            icon="airballoon"
+            mode="contained"
+            onPress={() => onRegister(email, password, repeatedPassword)}
+          >
+            Register
+          </AuthButton>
+        ) : (
+          <ActivityIndicator animating={true} color={Colors.red300} />
+        )}
       </AccountContainer>
       <Spacer variant="bottom.large" />
       <AuthButton
