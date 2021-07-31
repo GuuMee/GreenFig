@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import { BooksSearchNavigator } from "./books-search.navigator";
+import { SettingsNavigator } from "./settings.navigator";
 import { SafeArea } from "../../components/utility/safe-area.component";
 
 const Tab = createBottomTabNavigator();
@@ -17,11 +18,6 @@ const TAB_ICON = {
   Profile: "md-flower-outline",
 };
 
-const Profile = () => (
-  <SafeArea>
-    <Text>Profile</Text>
-  </SafeArea>
-);
 const Bookshelf = () => (
   <SafeArea>
     <Text>Bookshelf</Text>
@@ -51,6 +47,6 @@ export const AppNavigator = () => (
   >
     <Tab.Screen name="Bookshelf" component={Bookshelf} />
     <Tab.Screen name="Search" component={BooksSearchNavigator} />
-    <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Screen name="Profile" component={SettingsNavigator} />
   </Tab.Navigator>
 );
