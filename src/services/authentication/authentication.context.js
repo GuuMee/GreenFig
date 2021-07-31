@@ -9,27 +9,37 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
+  firebase.auth().onAuthStateChanged((usr) => {
+    if (usr) {
+      setUser(usr);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  });
+
   const onLogin = (email, password) => {
     setIsLoading(true);
     loginRequest(email, password)
-      .then((usr) => {
-        setUser(usr);
+      .then((u) => {
+        setUser(u);
         setIsLoading(false);
       })
-      .catch((err) => {
+      .catch((e) => {
         setIsLoading(false);
-        setError(err.toString());
+        setError(e.toString());
       });
   };
 
   const onRegister = (email, password, repeatedPassword) => {
+    setIsLoading(true);
     if (password !== repeatedPassword) {
       setError("Error: Passwords do not match");
       return;
     }
     firebase
       .auth()
-      .createUserWithEmailandPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((usr) => {
         setUser(usr);
         setIsLoading(false);
@@ -40,14 +50,26 @@ export const AuthenticationContextProvider = ({ children }) => {
       });
   };
 
+  const onLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(null);
+        setError(null);
+      });
+  };
+
   return (
     <AuthenticationContext.Provider
       value={{
+        isAuthenticated: !!user,
         user,
         isLoading,
         error,
         onLogin,
         onRegister,
+        onLogout,
       }}
     >
       {children}
