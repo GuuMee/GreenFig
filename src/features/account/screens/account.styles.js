@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ImageBackground } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
-import { Text } from "../../../components/typography/text.component";
+import { TypographyText } from "../../../components/typography/text.component";
 
 export const AccountBackground = styled(ImageBackground).attrs({
   source: require("../../../../assets/image12-2.jpg"),
@@ -14,7 +14,7 @@ export const AccountBackground = styled(ImageBackground).attrs({
 `;
 
 export const AccountCover = styled.View`
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.7);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -33,11 +33,14 @@ export const AuthButton = styled(Button).attrs({
 `;
 
 export const AuthInput = styled(TextInput)`
-  width: 350px;
+  width: 300px;
 `;
 
-export const Title = styled(Text)`
-  font-size: 30px;
+export const Title = styled(TypographyText)`
+  font-size: 40px;
+  font-family: ${(props) => props.theme.fonts.title};
+  padding: ${(props) => props.theme.space[3]};
+  color: ${(props) => props.theme.colors.ui.secondary};
 `;
 
 export const ErrorContainer = styled.View`
@@ -46,4 +49,27 @@ export const ErrorContainer = styled.View`
   align-self: center;
   margin-top: ${(props) => props.theme.space[2]};
   margin-bottom: ${(props) => props.theme.space[2]};
+`;
+
+export const AnimationWrapper = styled.View`
+  width: 100%;
+  height: 150%;
+  position: absolute;
+  align-self: center;
+  bottom: 153%;
+`;
+
+export const AnimationWrapperLogin = styled.View`
+  width: 100%;
+  height: 70%;
+  position: absolute;
+  bottom: 105%;
+  align-self: center;
+`;
+export const AnimationWrapperRegister = styled.View`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  align-self: center;
+  bottom: 93%;
 `;
