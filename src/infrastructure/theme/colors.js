@@ -3,7 +3,7 @@ export const colors = {
     primary: "#4fb68f",
     secondary: "#3ba789",
     tertiary: "#3ba78a",
-    fortiary: "#0e9d7c",
+    quaternary: "#0e9d7c",
     muted: "#87c9a9",
   },
   fig: {
