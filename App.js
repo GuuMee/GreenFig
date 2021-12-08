@@ -22,6 +22,12 @@ import { AuthenticationContextProvider } from "./src/services/authentication/aut
 import { Navigation } from "./src/infrastructure/navigation/index";
 import * as firebase from "firebase";
 
+import { booksRequest } from "./src/services/books/books.service";
+import {
+  BooksContext,
+  BooksContextProvider,
+} from "./src/services/books/books.context";
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAA7NI7WFMjwEtPWfkXPP8ReJmgaahCnSw",
@@ -61,7 +67,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <Navigation />
+          <BooksContextProvider>
+            <Navigation />
+          </BooksContextProvider>
         </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />

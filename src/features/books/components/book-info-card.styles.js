@@ -2,12 +2,13 @@ import styled from "styled-components/native";
 import { Card, Title, Paragraph, Modal } from "react-native-paper";
 
 export const BookCard = styled(Card)`
+  max-width: 200px;
+  min-width: 140px;
   background-color: ${(props) => props.theme.colors.bg.primary};
   margin: ${(props) => props.theme.space[1]};
 `;
 
 export const BookCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[0]};
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 
@@ -31,11 +32,5 @@ export const Info = styled.View`
 
 export const Rating = styled.View`
   flex-direction: row;
-  padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[0]};
-`;
-
-export const ModalStyled = styled(Modal)`
-  background-color: ${(props) => props.theme.colors.bg.primary};
-  padding: ${(props) => props.theme.space[3]};
 `;

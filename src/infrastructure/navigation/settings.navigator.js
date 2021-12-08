@@ -1,5 +1,5 @@
 import React from "react";
-import { SettingsScreen } from "../../features/settings/screens/settings.screen";
+import { SettingsScreen } from "../../features/settings/screen/settings.screen";
 import {
   createStackNavigator,
   CardStyleInterpolators,

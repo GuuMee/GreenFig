@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
-import { List } from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { List, Button } from "react-native-paper";
 import { BookInfoCard } from "../components/book-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -14,9 +14,29 @@ export const BookDetailScreen = ({ route }) => {
   const { book } = route.params;
   return (
     <SafeArea>
-      <BookInfoCard />
+      <View>
+        <BookInfoCard />
+      </View>
       <Spacer variant="bottom.large" />
       <ScrollView>
+        <Button
+          icon="book"
+          mode="contained"
+          contentStyle={{ height: 40 }}
+          onPress={() => console.log("Pressed")}
+        >
+          Buy
+        </Button>
+        <Spacer variant="bottom.large" />
+        <Button
+          disabled
+          icon="read"
+          mode="contained"
+          contentStyle={{ height: 40 }}
+          onPress={() => console.log("Pressed")}
+        >
+          Read
+        </Button>
         <List.Accordion
           title="Drinks"
           left={(props) => <List.Icon {...props} icon="cup" />}

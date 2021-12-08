@@ -1,6 +1,6 @@
 import React from "react";
 import { TypographyText } from "../../../components/typography/text.component";
-import { Card, Button } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 
@@ -57,13 +57,6 @@ export const BookInfoCard = ({ book = {} }) => {
         </Rating>
         {/* <StyledParagraph> {description} </StyledParagraph> */}
       </Info>
-      <Button
-        icon="book"
-        mode="contained"
-        onPress={() => console.log("Pressed")}
-      >
-        Buy
-      </Button>
     </BookCard>
   );
 };

@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import { BooksSearchNavigator } from "./books-search.navigator";
+import { BookShelfNavigator } from "./bookshelf.navigator";
 import { SettingsNavigator } from "./settings.navigator";
 import { SafeArea } from "../../components/utility/safe-area.component";
 
@@ -17,12 +18,6 @@ const TAB_ICON = {
   ProfileFocus: "md-flower-sharp",
   Profile: "md-flower-outline",
 };
-
-const Bookshelf = () => (
-  <SafeArea>
-    <Text>Bookshelf</Text>
-  </SafeArea>
-);
 
 export const AppNavigator = () => (
   <Tab.Navigator
@@ -42,11 +37,11 @@ export const AppNavigator = () => (
     })}
     tabBarOptions={{
       activeTintColor: "green",
-      inactiveTintColor: "gray",
+      inactiveTintColor: "gray", //component={BookShelfNavigator}} component={BooksSearchNavigator} component={SettingsNavigator}
     }}
   >
-    <Tab.Screen name="Bookshelf" component={Bookshelf} />
-    <Tab.Screen name="Search" component={BooksSearchNavigator} />
-    <Tab.Screen name="Profile" component={SettingsNavigator} />
+    <Tab.Screen name="Bookshelf" />
+    <Tab.Screen name="Search" />
+    <Tab.Screen name="Profile"  />
   </Tab.Navigator>
 );
